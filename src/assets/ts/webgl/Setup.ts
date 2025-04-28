@@ -4,23 +4,23 @@ import { PARAMS } from "./constants";
 import GUI from "lil-gui";
 
 export class Setup {
-  renderer: THREE.WebGLRenderer | null
-  scene: THREE.Scene | null
-  camera: THREE.PerspectiveCamera | null
-  ambientLight: THREE.AmbientLight | null
+  renderer: THREE.WebGLRenderer | null;
+  scene: THREE.Scene | null;
+  camera: THREE.PerspectiveCamera | null;
+  ambientLight: THREE.AmbientLight | null;
   directionalLight: THREE.DirectionalLight | null;
-  loader: THREE.TextureLoader
-  guiValue: any
-  controls: OrbitControls | null
+  loader: THREE.TextureLoader;
+  guiValue: any;
+  controls: OrbitControls | null;
 
   constructor() {
     this.renderer = null;
     this.scene = null;
     this.camera = null;
     this.ambientLight = null;
-    this.directionalLight = null
+    this.directionalLight = null;
     this.controls = null;
-    this.guiValue = null
+    this.guiValue = null;
     this.loader = new THREE.TextureLoader();
 
     this.init();
@@ -37,7 +37,7 @@ export class Setup {
   }
 
   setRenderer() {
-    const element = document.querySelector('.webgl');
+    const element = document.querySelector(".webgl");
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setSize(PARAMS.WINDOW.W, PARAMS.WINDOW.H);
     element?.appendChild(this.renderer.domElement);
@@ -49,7 +49,36 @@ export class Setup {
   }
 
   setScene() {
+    const cubeRenderTarget = new THREE.WebGLCubeRenderTarget(256);
+    const cubeCamera = new THREE.CubeCamera(0.1, 500, cubeRenderTarget);
     this.scene = new THREE.Scene();
+
+    const generateCubeUrls = (prefix: string, postfix: string) => {
+      return [
+        `${prefix}dark-s_px${postfix}`,
+        `${prefix}dark-s_nx${postfix}`,
+        `${prefix}dark-s_py${postfix}`,
+        `${prefix}dark-s_ny${postfix}`,
+        `${prefix}dark-s_pz${postfix}`,
+        `${prefix}dark-s_nz${postfix}`,
+      ];
+    };
+    const cubeTextureUrls = generateCubeUrls("/cubeMap/", ".jpg");
+
+    const loadTexture = async () => {
+      if(!this.scene || !this.renderer) return
+
+      try {
+        const cubeTextureLoader = new THREE.CubeTextureLoader();
+        const cubeTexture = await cubeTextureLoader.loadAsync(cubeTextureUrls);
+        this.scene.background = cubeTexture;
+        this.scene.environment = cubeTexture;
+        cubeCamera.update(this.renderer, this.scene);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    loadTexture();
   }
 
   setCamera() {
@@ -81,7 +110,7 @@ export class Setup {
   }
 
   setAmbientLight() {
-    this.ambientLight = new THREE.AmbientLight(0xffffff, 10)
+    this.ambientLight = new THREE.AmbientLight(0xffffff, 10);
     this.scene?.add(this.ambientLight);
   }
 
@@ -91,10 +120,9 @@ export class Setup {
       color: { r: 0.8314, g: 0.898, b: 1.0 },
       wireframe: false,
     };
-    gui.addColor(this.guiValue, "color")
+    gui.addColor(this.guiValue, "color");
     gui.add(this.guiValue, "wireframe");
   }
-
 
   setHelper() {
     if (!this.camera) return;
