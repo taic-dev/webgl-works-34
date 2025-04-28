@@ -88,24 +88,19 @@ export class Setup {
       PARAMS.CAMERA.NEAR,
       PARAMS.CAMERA.FAR
     );
-    const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
-    const dist = window.innerHeight / 2 / Math.tan(fovRad);
-
-    this.camera.position.set(0, 0, dist);
+    this.camera.position.set(0, 0, 40);
   }
 
   updateCamera() {
     if (!this.camera) return;
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera?.updateProjectionMatrix();
-    const fovRad = (PARAMS.CAMERA.FOV / 2) * (Math.PI / 180);
-    const dist = window.innerHeight / 2 / Math.tan(fovRad);
-    this.camera.position.set(0, 0, dist);
+    this.camera.position.set(0, 0, 40);
   }
 
   setDirectionalLight() {
     this.directionalLight = new THREE.DirectionalLight(0xfff0dd, 5);
-    this.directionalLight.position.set(0, 0, 10);
+    this.directionalLight.position.set(0, 10, 10);
     this.scene?.add(this.directionalLight);
   }
 

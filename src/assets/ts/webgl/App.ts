@@ -1,21 +1,18 @@
-import { Mesh } from "./Mesh";
-import { MvMesh } from "./MvMesh";
+import { FaceModel } from "./FaceModel";
 import { Setup } from "./Setup";
 
 export class App {
   setup: Setup
-  mesh: Mesh
-  mvMesh: MvMesh
+  faceModel: FaceModel
 
   constructor() {
     this.setup = new Setup();
-    this.mesh = new Mesh(this.setup);
-    this.mvMesh = new MvMesh(this.setup);
+    this.faceModel = new FaceModel(this.setup);
+    
   }
 
   init() {
-    this.mvMesh.init();
-    this.mesh.init();
+    this.faceModel.init();
   }
 
   render() {
@@ -24,13 +21,10 @@ export class App {
   }
 
   update() {
-    this.mesh.updateMesh();
-    this.mvMesh.updateMesh();
+    
   }
 
   resize() {
     this.setup.resize();
-    this.mesh.resize();
-    this.mvMesh.resize();
   }
 }
