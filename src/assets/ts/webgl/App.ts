@@ -18,10 +18,11 @@ export class App {
   render() {
     if(!this.setup.scene || !this.setup.camera) return
     this.setup.renderer?.render(this.setup.scene, this.setup.camera)
+    this.faceModel.raf()
   }
 
   update() {
-    
+
   }
 
   resize() {

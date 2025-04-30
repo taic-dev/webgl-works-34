@@ -112,10 +112,14 @@ export class Setup {
   setGui() {
     const gui = new GUI();
     this.guiValue = {
-      color: { r: 0.8314, g: 0.898, b: 1.0 },
+      progress: 0,
+      frequency: 0.1,
+      amplitude: 100,
       wireframe: false,
     };
-    gui.addColor(this.guiValue, "color");
+    gui.add(this.guiValue, "progress", -100, 100, 0.01);
+    gui.add(this.guiValue, "frequency", 0, 0.1, 0.01);
+    gui.add(this.guiValue, "amplitude", 0, 100, 0.01);
     gui.add(this.guiValue, "wireframe");
   }
 
