@@ -118,7 +118,7 @@ export class Setup {
       wireframe: false,
     };
     gui.add(this.guiValue, "progress", -100, 100, 0.01);
-    gui.add(this.guiValue, "frequency", 0, 0.1, 0.01);
+    gui.add(this.guiValue, "frequency", 0, 0.05, 0.01);
     gui.add(this.guiValue, "amplitude", 0, 100, 0.01);
     gui.add(this.guiValue, "wireframe");
   }
