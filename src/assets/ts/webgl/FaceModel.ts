@@ -104,7 +104,7 @@ export class FaceModel {
   
         if(noise < uProgress) discard;
   
-        float edgeWidth = uProgress + 1.;
+        float edgeWidth = uProgress + 3.;
         if(noise > uProgress && noise < edgeWidth) {
           gl_FragColor = vec4(vec3(0.0, 0.898, 1.0), noise);  
         }
