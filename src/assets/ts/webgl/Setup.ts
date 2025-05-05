@@ -99,8 +99,8 @@ export class Setup {
   }
 
   setDirectionalLight() {
-    this.directionalLight = new THREE.DirectionalLight(0xfff0dd, 5);
-    this.directionalLight.position.set(0, 10, 10);
+    this.directionalLight = new THREE.DirectionalLight(0xfff0dd, 0.05);
+    this.directionalLight.position.set(1, 0, 1);
     this.scene?.add(this.directionalLight);
   }
 
@@ -115,12 +115,11 @@ export class Setup {
       progress: 0,
       frequency: 0.1,
       amplitude: 100,
-      wireframe: false,
     };
+
     gui.add(this.guiValue, "progress", -100, 100, 0.01);
     gui.add(this.guiValue, "frequency", 0, 0.05, 0.01);
     gui.add(this.guiValue, "amplitude", 0, 100, 0.01);
-    gui.add(this.guiValue, "wireframe");
   }
 
   setHelper() {
