@@ -63,7 +63,7 @@ export class Setup {
         `${prefix}dark-s_nz${postfix}`,
       ];
     };
-    const cubeTextureUrls = generateCubeUrls("/cubeMap/", ".jpg");
+    const cubeTextureUrls = generateCubeUrls(`${import.meta.env.BASE_URL}/cubeMap/`, ".jpg");
 
     const loadTexture = async () => {
       if(!this.scene || !this.renderer) return

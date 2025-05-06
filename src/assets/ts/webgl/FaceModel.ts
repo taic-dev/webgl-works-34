@@ -124,7 +124,7 @@ export class FaceModel {
     loader.setDRACOLoader(dracoLoader);
 
     loader.load(
-      `/model/face-draco.gltf`,
+      `${import.meta.env.BASE_URL}/model/face-draco.gltf`,
       (gltf) => {
         const faceModel = gltf.scene;
         const faceModelMesh = faceModel.children[0].children[0].children[0];
