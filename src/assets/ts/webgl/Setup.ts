@@ -33,7 +33,7 @@ export class Setup {
     this.setAmbientLight();
     this.setDirectionalLight();
     this.setGui();
-    this.setHelper();
+    // this.setHelper();
   }
 
   setRenderer() {
@@ -88,18 +88,19 @@ export class Setup {
       PARAMS.CAMERA.NEAR,
       PARAMS.CAMERA.FAR
     );
-    this.camera.position.set(0, 0, 40);
+    this.camera.position.set(-40, -40, -40);
+    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
   updateCamera() {
     if (!this.camera) return;
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera?.updateProjectionMatrix();
-    this.camera.position.set(0, 0, 40);
+    this.camera.position.set(0, 0, 45);
   }
 
   setDirectionalLight() {
-    this.directionalLight = new THREE.DirectionalLight(0xfff0dd, 0.05);
+    this.directionalLight = new THREE.DirectionalLight(0xfff0dd, 0.1);
     this.directionalLight.position.set(1, 0, 1);
     this.scene?.add(this.directionalLight);
   }
@@ -118,7 +119,7 @@ export class Setup {
     };
 
     gui.add(this.guiValue, "progress", -100, 100, 0.01);
-    gui.add(this.guiValue, "frequency", 0, 0.05, 0.01);
+    gui.add(this.guiValue, "frequency", 0, 0.5, 0.01);
     gui.add(this.guiValue, "amplitude", 0, 100, 0.01);
   }
 
